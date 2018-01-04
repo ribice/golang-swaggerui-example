@@ -1,7 +1,7 @@
 package swagger
 
 import (
-	"github.com/ribice/goswagg"
+	"github.com/ribice/golang-swaggerui-example"
 )
 
 // HTTP status code 200 and user model in data

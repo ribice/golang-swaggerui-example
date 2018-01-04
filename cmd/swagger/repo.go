@@ -1,8 +1,8 @@
 package swagger
 
 import (
-	"github.com/ribice/goswagg"
-	"github.com/ribice/goswagg/cmd/api"
+	"github.com/ribice/golang-swaggerui-example"
+	"github.com/ribice/golang-swaggerui-example/cmd/api"
 )
 
 // Repository model request

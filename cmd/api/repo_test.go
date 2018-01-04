@@ -12,7 +12,7 @@ import (
 	"github.com/bouk/monkey"
 	"github.com/gorilla/mux"
 
-	"github.com/ribice/goswagg"
+	"github.com/ribice/golang-swaggerui-example"
 )
 
 func getRepoRoutes() *mux.Router {
@@ -288,7 +288,7 @@ func TestDeleteRepo(t *testing.T) {
 		status int
 		err    string
 	}{
-		{name: "Unexisting repo", repo: "goswagg", status: http.StatusNotFound, err: "Repo does not exist"},
+		{name: "Unexisting repo", repo: "golang-swaggerui-example", status: http.StatusNotFound, err: "Repo does not exist"},
 		{name: "Protected repo", repo: "glice", status: http.StatusForbidden, err: "This repository has protected status. Disable it in settings to proceed with deletion."},
 		{name: "Success", repo: "kit", status: http.StatusOK},
 	}

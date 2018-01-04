@@ -4,7 +4,7 @@
 
 // Golang SwaggerUI example
 //
-// This documentation describes example APIs found under https://github.com/ribice/go-swaggerui-example
+// This documentation describes example APIs found under https://github.com/ribice/golang-swaggerui-example
 //
 //     Schemes: https
 //     BasePath: /v1
@@ -34,8 +34,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/ribice/goswagg/cmd/api"
-	_ "github.com/ribice/goswagg/cmd/swagger"
+	"github.com/ribice/golang-swaggerui-example/cmd/api"
+	_ "github.com/ribice/golang-swaggerui-example/cmd/swagger"
 
 	"github.com/gorilla/mux"
 )

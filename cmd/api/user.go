@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/ribice/goswagg"
+	"github.com/ribice/golang-swaggerui-example"
 
 	"github.com/gorilla/mux"
 )

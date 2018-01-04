@@ -400,7 +400,7 @@
           "x-go-name": "Public"
         }
       },
-      "x-go-package": "github.com/ribice/goswagg/cmd/api"
+      "x-go-package": "github.com/ribice/golang-swaggerui-example/cmd/api"
     },
     "Repository": {
       "type": "object",
@@ -474,7 +474,7 @@
           "x-go-name": "Website"
         }
       },
-      "x-go-package": "github.com/ribice/goswagg"
+      "x-go-package": "github.com/ribice/golang-swaggerui-example"
     },
     "User": {
       "type": "object",
@@ -526,7 +526,7 @@
           "x-go-name": "Username"
         }
       },
-      "x-go-package": "github.com/ribice/goswagg"
+      "x-go-package": "github.com/ribice/golang-swaggerui-example"
     }
   },
   "responses": {
