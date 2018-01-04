@@ -10,11 +10,13 @@ Golang-swaggerui-example is an example repository for setting up API documentati
 
 The project is deployed on free app engine tier, and accessible via [LINK](https://ribice.ba/goswagg/). Swagger.json file is served on /swagger route - [LINK](https://ribice.ba/goswagg/v1/swagger).
 
-For now, in order to get SwaggerUI working, head over to Swagger Petstore, and paste the following URL at the top:
+For now, in order to get SwaggerUI working, head over to [Swagger Petstore](http://petstore.swagger.io/#/), and paste the following URL at the top:
 
 ```
 https://ribice.ba/goswagg/v1/swagger
 ```
+
+In the future, I might deploy my own SwaggerUI.
 
 ## NOTE
 

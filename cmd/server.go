@@ -11,6 +11,7 @@
 //     Version: 1.0.0
 //     License: MIT http://opensource.org/licenses/MIT
 //     Contact: Emir Ribic <ribice@gmail.com> https://ribice.ba
+//     Host: ribice.ba/goswagg
 //
 //     Consumes:
 //     - application/json
