@@ -1,0 +1,747 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "This documentation describes example APIs found under https://github.com/ribice/go-swaggerui-example",
+    "title": "Golang SwaggerUI example",
+    "contact": {
+      "name": "Emir Ribic",
+      "url": "https://ribice.ba",
+      "email": "ribice@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    },
+    "version": "1.0.0"
+  },
+  "basePath": "/v1",
+  "paths": {
+    "/repo": {
+      "put": {
+        "tags": [
+          "repos"
+        ],
+        "summary": "Updates an existing repository for currently authenticated user.",
+        "operationId": "repoReq",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Repository"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/repoResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          }
+        }
+      },
+      "post": {
+        "description": "If repository name is \"exists\", error conflict (409) will be returned.",
+        "tags": [
+          "repos"
+        ],
+        "summary": "Creates a new repository for the currently authenticated user.",
+        "operationId": "createRepoReq",
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateRepoReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/repoResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          },
+          "409": {
+            "$ref": "#/responses/conflict"
+          }
+        }
+      }
+    },
+    "/repo/{author}": {
+      "get": {
+        "description": "If author length is between 6 and 8, Error Not Found (404) will be returned.",
+        "tags": [
+          "repos"
+        ],
+        "summary": "List the repositories owned by the given author.",
+        "operationId": "repoList",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "username of author",
+            "name": "author",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/reposResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          },
+          "404": {
+            "$ref": "#/responses/notFound"
+          }
+        }
+      }
+    },
+    "/repo/{author}/{repo}": {
+      "get": {
+        "description": "If length of author and repo combined is an odd number, Error Not Found (404) will be returned.",
+        "tags": [
+          "repos"
+        ],
+        "summary": "Returns requested repository.",
+        "operationId": "getRepo",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "username of author",
+            "name": "author",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/repoResp"
+          },
+          "404": {
+            "$ref": "#/responses/notFound"
+          }
+        }
+      }
+    },
+    "/repo/{repo}": {
+      "delete": {
+        "description": "Depending on the repository name modulo three, HTTP Status Forbidden (403), HTTP Status Not Found (404) or HTTP Status OK (200) may be returned.",
+        "tags": [
+          "repos"
+        ],
+        "summary": "Deletes requested repo if the owner is currently authenticated.",
+        "operationId": "deleteRepo",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "repository name",
+            "name": "repo",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ok"
+          },
+          "403": {
+            "$ref": "#/responses/forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/notFound"
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Gets user details for currently authenticated user.",
+        "operationId": "getUser",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/userResp"
+          }
+        }
+      }
+    },
+    "/user/following/{author}": {
+      "get": {
+        "description": "If author length is even returns true, otherwise false.",
+        "tags": [
+          "users"
+        ],
+        "summary": "Checks whether the requested author is followed by currently authenticated user.",
+        "operationId": "isFollowed",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "username of author",
+            "name": "author",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/bool"
+          }
+        }
+      },
+      "put": {
+        "description": "If author length is odd, returned HTTP StatusNotFound.",
+        "tags": [
+          "users"
+        ],
+        "summary": "Follows the requested author by currently authenticated user.",
+        "operationId": "follow",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "username of author",
+            "name": "author",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ok"
+          },
+          "404": {
+            "$ref": "#/responses/notFound"
+          }
+        }
+      },
+      "delete": {
+        "description": "If author length is odd, returned HTTP StatusNotFound.",
+        "tags": [
+          "users"
+        ],
+        "summary": "Checks whether the requested author is followed by currently authenticated user.",
+        "operationId": "unfollow",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "username of author",
+            "name": "author",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ok"
+          },
+          "404": {
+            "$ref": "#/responses/notFound"
+          }
+        }
+      }
+    },
+    "/user/search": {
+      "get": {
+        "description": "HTTP status will be returned depnding on first search term (a - 400, e - 403, rest - 200)",
+        "tags": [
+          "users"
+        ],
+        "summary": "Returns list of users by provided search parameters.",
+        "operationId": "searchUser",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "search params",
+            "name": "name",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/usersResp"
+          },
+          "400": {
+            "$ref": "#/responses/badReq"
+          },
+          "403": {
+            "$ref": "#/responses/forbidden"
+          }
+        }
+      }
+    },
+    "/user/starred/{author}/{repo}": {
+      "get": {
+        "description": "Depending on the combined length of author and repo, the following HTTP status will be returned 17+ StatusForbidden, 11+ StatusNotFound, 10- StatusOK",
+        "tags": [
+          "users"
+        ],
+        "summary": "Checks whether the requested repository is starred by currently authenticated user.",
+        "operationId": "isStarred",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "username of author",
+            "name": "author",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "repository name",
+            "name": "repo",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/bool"
+          },
+          "403": {
+            "$ref": "#/responses/forbidden"
+          },
+          "404": {
+            "$ref": "#/responses/notFound"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "If repo name starts with a,e or i HTTP StatusNotFound will be returned.",
+        "operationId": "star",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "username of author",
+            "name": "author",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "repository name",
+            "name": "repo",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ok"
+          },
+          "404": {
+            "$ref": "#/responses/notFound"
+          }
+        }
+      },
+      "delete": {
+        "description": "If author starts with a, or repo ends with r, HTTP StatusNotFound will be returned.",
+        "tags": [
+          "users"
+        ],
+        "summary": "Unstars the repository for currently authenticated user.",
+        "operationId": "star",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "username of author",
+            "name": "author",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "repository name",
+            "name": "repo",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/ok"
+          },
+          "404": {
+            "$ref": "#/responses/notFound"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CreateRepoReq": {
+      "description": "CreateRepoReq contains request data for create repo API",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the repository",
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "public": {
+          "description": "Public defines whether created repository should be public or not",
+          "type": "boolean",
+          "x-go-name": "Public"
+        }
+      },
+      "x-go-package": "github.com/ribice/goswagg/cmd/api"
+    },
+    "Repository": {
+      "type": "object",
+      "title": "Repository represents a git repository.",
+      "properties": {
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedOn"
+        },
+        "deleted_on": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "DeletedOn"
+        },
+        "description": {
+          "type": "string",
+          "x-go-name": "Description"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "ID"
+        },
+        "is_fork": {
+          "type": "boolean",
+          "x-go-name": "IsFork"
+        },
+        "is_mirror": {
+          "type": "boolean",
+          "x-go-name": "IsMirror"
+        },
+        "is_private": {
+          "type": "boolean",
+          "x-go-name": "IsPrivate"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "num_forks": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "NumForks"
+        },
+        "num_issues": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "NumIssues"
+        },
+        "num_pulls": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "NumPulls"
+        },
+        "num_stars": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "NumStars"
+        },
+        "owner": {
+          "$ref": "#/definitions/User"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedOn"
+        },
+        "website": {
+          "type": "string",
+          "x-go-name": "Website"
+        }
+      },
+      "x-go-package": "github.com/ribice/goswagg"
+    },
+    "User": {
+      "type": "object",
+      "title": "User represents the object of individual and member of organization.",
+      "properties": {
+        "created_on": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "CreatedOn"
+        },
+        "deleted_on": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "DeletedOn"
+        },
+        "email": {
+          "type": "string",
+          "x-go-name": "Email"
+        },
+        "first_name": {
+          "type": "string",
+          "x-go-name": "FirstName"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "ID"
+        },
+        "last_login": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "LastLogin"
+        },
+        "last_name": {
+          "type": "string",
+          "x-go-name": "LastName"
+        },
+        "updated_on": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "UpdatedOn"
+        },
+        "url": {
+          "type": "string",
+          "x-go-name": "URL"
+        },
+        "username": {
+          "type": "string",
+          "x-go-name": "Username"
+        }
+      },
+      "x-go-package": "github.com/ribice/goswagg"
+    }
+  },
+  "responses": {
+    "badReq": {
+      "description": "Error Bad Request",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 400 - Status Bad Request",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "message": {
+            "description": "Detailed error message",
+            "type": "string",
+            "x-go-name": "Message"
+          }
+        }
+      }
+    },
+    "bool": {
+      "description": "Boolean response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP Status Code 200",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Boolean true/false",
+            "type": "boolean",
+            "x-go-name": "Data"
+          }
+        }
+      }
+    },
+    "conflict": {
+      "description": "Error Conflict",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 409 - Conflict",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "message": {
+            "description": "Detailed error message",
+            "type": "string",
+            "x-go-name": "Message"
+          }
+        }
+      }
+    },
+    "forbidden": {
+      "description": "Error Forbidden",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 403 - Forbidden",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "message": {
+            "description": "Detailed error message",
+            "type": "string",
+            "x-go-name": "Message"
+          }
+        }
+      }
+    },
+    "internal": {
+      "description": "Error Interval Server",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 500 - Internal server error",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "message": {
+            "description": "Detailed error message",
+            "type": "string",
+            "x-go-name": "Message"
+          }
+        }
+      }
+    },
+    "notFound": {
+      "description": "Error Not Found",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 404 - Not Found",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "message": {
+            "description": "Detailed error message",
+            "type": "string",
+            "x-go-name": "Message"
+          }
+        }
+      }
+    },
+    "ok": {
+      "description": "Success response",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP Status Code 200",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          }
+        }
+      }
+    },
+    "repoResp": {
+      "description": "HTTP status code 200 and repository model in data",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/Repository"
+          }
+        }
+      }
+    },
+    "reposResp": {
+      "description": "HTTP status code 200 and an array of repository models in data",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Array of repository models",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Repository"
+            },
+            "x-go-name": "Data"
+          }
+        }
+      }
+    },
+    "userResp": {
+      "description": "HTTP status code 200 and user model in data",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "$ref": "#/definitions/User"
+          }
+        }
+      }
+    },
+    "usersResp": {
+      "description": "HTTP status code 200 and an array of user models in data",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code 200 - Status OK",
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "Code"
+          },
+          "data": {
+            "description": "Array of user models",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/User"
+            },
+            "x-go-name": "Data"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  }
+}

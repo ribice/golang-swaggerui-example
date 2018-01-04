@@ -1,0 +1,15 @@
+language: go
+sudo: false
+go:
+- tip
+before_install:
+- openssl aes-256-cbc -K $encrypted_16e2409ca575_key -iv $encrypted_16e2409ca575_iv
+  -in key.json.enc -out key.json -d
+- go get github.com/mattn/goveralls
+- go get golang.org/x/tools/cmd/cover
+script:
+- "$HOME/gopath/bin/goveralls -service=travis-ci"
+deploy:
+  provider: gae
+  keyfile: key.json
+  project: go-swagg
