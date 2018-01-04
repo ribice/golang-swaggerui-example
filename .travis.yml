@@ -13,3 +13,4 @@ deploy:
   provider: gae
   keyfile: key.json
   project: go-swagg
+  config: cmd/app.yaml
