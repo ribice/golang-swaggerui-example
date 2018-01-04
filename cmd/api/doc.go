@@ -1,6 +1,7 @@
 package api
 
 import (
+	"io/ioutil"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -14,5 +15,6 @@ func RegisterDocRoutes(r *mux.Router, p string) {
 
 func docHandler(w http.ResponseWriter, r *http.Request) {
 	r.Header.Add("Content-Type", "application/json")
-	http.ServeFile(w, r, "swagger.json")
+	data, _ := ioutil.ReadFile("swagger.json")
+	w.Write(data)
 }
