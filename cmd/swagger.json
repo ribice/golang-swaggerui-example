@@ -10,7 +10,7 @@
   ],
   "swagger": "2.0",
   "info": {
-    "description": "This documentation describes example APIs found under https://github.com/ribice/go-swaggerui-example",
+    "description": "This documentation describes example APIs found under https://github.com/ribice/golang-swaggerui-example",
     "title": "Golang SwaggerUI example",
     "contact": {
       "name": "Emir Ribic",
@@ -23,6 +23,7 @@
     },
     "version": "1.0.0"
   },
+  "host": "ribice.ba/goswagg",
   "basePath": "/v1",
   "paths": {
     "/repo": {
@@ -203,7 +204,7 @@
         }
       },
       "put": {
-        "description": "If author length is odd, returned HTTP StatusNotFound.",
+        "description": "If author length is odd, returns HTTP StatusNotFound.",
         "tags": [
           "users"
         ],
@@ -228,7 +229,7 @@
         }
       },
       "delete": {
-        "description": "If author length is odd, returned HTTP StatusNotFound.",
+        "description": "If author length is odd, returns HTTP StatusNotFound.",
         "tags": [
           "users"
         ],
@@ -255,7 +256,7 @@
     },
     "/user/search": {
       "get": {
-        "description": "HTTP status will be returned depnding on first search term (a - 400, e - 403, rest - 200)",
+        "description": "HTTP status will be returned depending on first search term (a - 400, e - 403, rest - 200)",
         "tags": [
           "users"
         ],

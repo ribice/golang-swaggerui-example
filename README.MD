@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/ribice/golang-swaggerui-example/badge.svg?branch=master)](https://coveralls.io/github/ribice/golang-swaggerui-example?branch=master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/ribice/golang-swaggerui-example)](https://goreportcard.com/report/github.com/ribice/golang-swaggerui-example)
 
-Golang-swaggerui-example is an example repository for setting up API documentations using SwaggerUI in your Golang project. Detailed post is available on [my blog](https://ribice.ba/swagger-golang)
+Golang-swaggerui-example is an example repository for setting up API documentations using SwaggerUI in your Golang project. Detailed post is available on [my blog](https://ribice.ba/swagger-golang).
 
 ## API Interaction
 
@@ -16,7 +16,7 @@ For now, in order to get SwaggerUI working, head over to [Swagger Petstore](http
 https://ribice.ba/goswagg/v1/swagger
 ```
 
-In the future, I might deploy my own SwaggerUI.
+In the future, I might deploy my own SwaggerUI in order to prevent this step. Also, swagger.json should not be in your git repository, instead it should be produced by a CI tool.
 
 ## NOTE
 
