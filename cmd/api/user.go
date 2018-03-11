@@ -63,7 +63,7 @@ func RegisterUserRoutes(r *mux.Router, p string) {
 	// swagger:operation PUT /user/starred/{author}/{repo} users star
 	// ---
 	// summary: Stars the repository for currently authenticated user.
-	// summary: If repo name starts with a,e or i HTTP StatusNotFound will be returned.
+	// description: If repo name starts with a,e or i HTTP StatusNotFound will be returned.
 	// parameters:
 	// - name: author
 	//   in: path

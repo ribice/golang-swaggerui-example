@@ -10,10 +10,10 @@ import (
 // RegisterDocRoutes adds swagger endpoint
 func RegisterDocRoutes(r *mux.Router, p string) {
 	dr := r.PathPrefix(p).Subrouter()
-	dr.HandleFunc("", docHandler).Methods("GET")
+	dr.HandleFunc("", DocHandler).Methods("GET")
 }
 
-func docHandler(w http.ResponseWriter, r *http.Request) {
+func DocHandler(w http.ResponseWriter, r *http.Request) {
 	r.Header.Add("Content-Type", "application/json")
 	data, _ := ioutil.ReadFile("swagger.json")
 	w.Write(data)
