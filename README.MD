@@ -1,7 +1,7 @@
 # golang-swaggerui-example
 
 [![Build Status](https://travis-ci.org/ribice/golang-swagger-ui-example.svg?branch=master)](https://travis-ci.org/ribice/golang-swaggerui-example)
-[![Coverage Status](https://coveralls.io/repos/github/ribice/golang-swaggerui-example/badge.svg?branch=master)](https://coveralls.io/github/ribice/golang-swaggerui-example?branch=master)
+[![codecov](https://codecov.io/gh/ribice/golang-swaggerui-example/branch/master/graph/badge.svg)](https://codecov.io/gh/ribice/golang-swaggerui-example)
 [![Go Report Card](https://goreportcard.com/badge/github.com/ribice/golang-swaggerui-example)](https://goreportcard.com/report/github.com/ribice/golang-swaggerui-example)
 
 Golang-swaggerui-example is an example repository for setting up API documentation using SwaggerUI in your Golang project. Detailed instruction is available on [my blog](https://ribice.ba/swagger-golang).
