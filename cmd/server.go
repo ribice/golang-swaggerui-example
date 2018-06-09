@@ -48,9 +48,9 @@ func main() {
 }
 
 func registerV1Routes(r *mux.Router) {
-	r.NotFoundHandler = http.HandlerFunc(api.DocHandler)
+	sh := http.StripPrefix("/swaggerui/", http.FileServer(http.Dir("./cmd/swaggerui/")))
+	r.PathPrefix("/swaggerui/").Handler(sh)
 	v1 := r.PathPrefix("/v1").Subrouter()
 	api.RegisterRepoRoutes(v1, "/repo")
 	api.RegisterUserRoutes(v1, "/user")
-	api.RegisterDocRoutes(v1, "/swagger")
 }
